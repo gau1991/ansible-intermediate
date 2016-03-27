@@ -37,7 +37,7 @@ style: |
 
 ---
 
-# Ansible for Beginners {#Cover}
+# Ansible for Intermediates {#Cover}
 
 *Brought you by [Gaurav Ashtikar](http://gau1991.me/)*
 
