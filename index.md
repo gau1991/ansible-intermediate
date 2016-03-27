@@ -30,10 +30,24 @@ style: |
         width:0.72em;
         height:0.72em;
         }
-    #Handlers code {
-        margin:0 0 0;
-        line-height:40px;
+    #Inventory p {
+        margin:0 0 15px;
+        line-height:25px;
         }
+    #Inventory code {
+        margin:0 0 0;
+        line-height:25px;
+        }
+
+    #Inventory1 p {
+        margin:0 0 15px;
+        line-height:25px;
+        }
+    #Inventory1 code {
+        margin:0 0 0;
+        line-height:25px;
+        }
+
 
 ---
 
@@ -47,52 +61,84 @@ style: |
 
 ## Contents
 
-1. Why Ansible?
-2. Installation and Basic setup
-3. Basic Modules
-4. Basic of Playbooks
+  1. Become
+  2. More about Inventory
+  3. Check Mode
+  4. Playbooks Variables and Jinja2 filters
+  5. Playbooks Conditionals, Loops and Blocks
+  6. Playbook Example - WordPress & Nginx on RHEL system
+  7. Vaults
 
-## Why Ansible
+## Become
 
-1. Simple to use
-2. Leverages Python
-3. Modular
-4. Open Source
-5. Support multi tier deployment
+  - Directive
+    - become
+    - become_user
+    - become_method
+  - Connection variables
+    - ansible_become
+    - ansible_become_method
+    - ansible_become_user
+    - ansible_become_pass
 
-{:.note}
-Ansible: fictional machine capable of instantaneous or superluminal communication.
-<!-- Courtesy: Wikipedia -->
+## Become
 
-## Installation
+ - Command Line Options
+   - `--ask-become-pass, -K`
+   - `--become, -b`
+   - `--become-method=BECOME_METHOD`
+   - `--become-user=BECOME_USER`
 
-1. Using APT (On Ubuntu)
-    - `$sudo apt-add-repository ppa:ansible/ansible`
-    - `$sudo apt-get update`
-    - `$sudo apt-get install ansible`
 
-2. Using YUM/DNF (On RHEL/CentOS/Fedora)
-    - `$sudo yum install ansible`
+## More about Inventory
 
-3. Using PIP (On Mac OS/Other Linux distros)
-    - `$sudo easy_install pip`
-    - `$sudo pip install ansible`
+<b>Host Variables</b>
 
-## Inventory file
+    [atlanta]
+    host1 http_port=80 maxRequestsPerChild=808
+    host2 http_port=303 maxRequestsPerChild=909
 
-    mail.example.com
 
-    [webservers]
-    foo.example.com
-    bar.example.com
+## More about Inventory {#Inventory1}
 
-- Default file is `/etc/ansible/hosts`
+<b>Group Variables</b>
 
-## SSH-Keys
+    [atlanta]
+    host1
+    host2
 
-1. Generate SSH key using `$ssh-keygen`
-2. Make sure you have access to remote system
-3. Add your public key (`~/.ssh/id_rsa.pub`) into remote `~/.ssh/authorized_keys` file
+    [atlanta:vars]
+    ntp_server=ntp.atlanta.example.com
+    proxy=proxy.atlanta.example.com
+
+## More about Inventory {#Inventory}
+
+<b>Groups of Groups, and Group Variables</b>
+
+    [atlanta]
+    host1
+
+    [raleigh]
+    host2
+
+    [southeast:children]
+    atlanta
+    raleigh
+
+    [southeast:vars]
+    some_server=foo.southeast.example.com
+
+    [usa:children]
+    southeast
+
+## Check Mode
+
+1. Using Check Mode
+  - `$ansible-playbook foo.yml --check`
+2. Running a task in check mode
+  - `always_run: yes`
+3. Showing Differences
+  - `ansible-playbook foo.yml --check --diff --limit foo.example.com`
 
 
 ## Test your setup
