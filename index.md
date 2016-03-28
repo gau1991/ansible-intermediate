@@ -64,10 +64,7 @@ style: |
   1. Become
   2. More about Inventory
   3. Check Mode
-  4. Playbooks Variables and Jinja2 filters
-  5. Playbooks Conditionals, Loops and Blocks
-  6. Playbook Example - WordPress & Nginx on RHEL system
-  7. Vaults
+  4. Complex Playbook Example - WordPress & Nginx on CentOS-7 system
 
 ## Become
 
@@ -131,108 +128,9 @@ style: |
     [usa:children]
     southeast
 
-## Check Mode
+## Complex Playbook Example - WordPress & Nginx on CentOS-7 system
 
-1. Using Check Mode
-  - `$ansible-playbook foo.yml --check`
-2. Running a task in check mode
-  - `always_run: yes`
-3. Showing Differences
-  - `ansible-playbook foo.yml --check --diff --limit foo.example.com`
-
-
-## Test your setup
-
-1. `$ansible all -m ping`
-3. `$ansible all -m ping -u root -k`
-4. `$ansible all -m ping -K`
-5. `$ansible all -m ping -f 10`
-
-## Modules
-
-1. Libraries that can be executed directly on remote hosts or through Playbooks.
-2. User can also write their own modules
-3. Two types of modules:
-  - [Core Modules](https://github.com/ansible/ansible-modules-core)
-  - [Extras Modules](https://github.com/ansible/ansible-modules-extras)
-
-## Command Modules
-  - `$ansible all -m command -a "ls"`
-  - `$ansible all -m command -a "df -h"`
-  - `$ansible all -m shell -a "ls"`
-  - `$ansible all -m shell -a "ls | grep txt"`
-  - `$ansible all -m shell -a "apt-get update"`
-
-## System Modules:
-  - `$ansible all -m ping`
-  - `$ansible all -m setup`
-  - `$ansible all -m hostname -a "name=web01"`
-  - `$ansible all -m service -a "name=nginx state=started"`
-  - `$ansible all -m user -a "name=jsmith generate_ssh_key=yes ssh_key_bits=2048 ssh_key_file=.ssh/id_rsa"`
-
-
-## File Modules:
-  - `$ansible all -m copy -a "src=/srv/myfiles/foo.conf dest=/etc/foo.conf"`
-  - `$ansible all -m find -a "paths=/tmp patterns=*.old"`
-  - `$ansible all -m stat -a "path=/path/to/something checksum_algorithm=sha256"`
-
-
-## Source Control Modules:
-  - `$ansible all -m git -a "repo=git://git@github.com/mylogin/hello.git dest=/home/mylogin/hello"`
-  - `$ansible all -m git -a "repo=git://foosball.example.org/path/to/repo.git dest=/srv/checkout clone=no update=no"`
-
-
-## Packaging Modules:
-  - `$ansible all -m apt -a "name=htop update_cache=yes"`
-  - `$ansible all -m apt -a "name=htop state=latest"`
-  - `$ansible all -m apt -a "name=htop state=absent"`
-  - `$ansible all -m apt -a "upgrade=dist"`
-
-## Playbooks
-
-Basic Playbook `nginx.yml` example:
-
-    ---
-    - hosts: local
-    tasks:
-      - name: Install Nginx
-        apt: pkg=nginx state=installed update_cache=true
-
-To run Playbook : `$ansible-playbook -b nginx.yml`
-
-## Handlers {#Handlers}
-{: .slide .w }
-
-    ---
-    - hosts: local
-    tasks:
-      - name: Install Nginx
-        apt: pkg=nginx state=installed update_cache=true
-        notify:
-          - Start Nginx
-    handlers:
-      - name: Start Nginx
-        service: name=nginx state=started
-
-## Playbook More YAML
-
- - Vars
- - Tasks
- - Handlers
- - Roles
- - Files
- - Meta
- - Templates
-
-## Playbook Directories
-
- - Group/Host Vars
- - Roles
- - Inventory Files
- - Libraries
- - Plugins
- - Playbook Files
-
+[Demo Time](https://github.com/ansible/ansible-examples/tree/master/wordpress-nginx_rhel7) 
 
 ## References
 
