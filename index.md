@@ -57,6 +57,26 @@ style: |
         line-height:25px;
         }
 
+    #Playbook1 p {
+        margin:0 0 15px;
+        line-height:25px;
+        }
+
+    #Playbook1 code {
+        margin:0 0 0;
+        line-height:25px;
+        }
+
+    #Playbook2 p {
+        margin:0 0 15px;
+        line-height:25px;
+        }
+
+    #Playbook2 code {
+        margin:0 0 0;
+        line-height:20px;
+        }
+
 
 ---
 
@@ -170,15 +190,48 @@ OR
   - `$ansible-playbook site.yml --vault-password-file ~/.vault_pass.txt`
   -  Setting ENV Variable `ANSIBLE_VAULT_PASSWORD_FILE`
 
-## More into Playbook
+## More into Playbook {#Playbook1}
 
- - Vars
- - Tasks
- - Handlers
- - Roles
- - Files
- - Meta
- - Templates
+    production                # inventory file for production
+    staging                   # inventory file for staging
+
+    group_vars/
+       group1                 # variables to particular groups
+       group2                 # ""
+    host_vars/
+       hostname1              # system specific variables
+       hostname2              # ""
+
+    library/                  # if any custom modules
+
+    site.yml                  # master playbook
+    webservers.yml            # playbook for webserver tier
+    dbservers.yml             # playbook for dbserver tier
+
+## More into Playbook {#Playbook2}
+
+    roles/
+        common/               # this represents a "role"
+            tasks/            #
+                main.yml      #  tasks file
+            handlers/         #
+                main.yml      #  handlers file
+            templates/        #  files for use with the template
+                ntp.conf.j2   #  templates end in .j2
+            files/            #
+                bar.txt       #  files for use with the copy
+                foo.sh        #  script for use with script
+            vars/             #
+                main.yml      #  variables associated
+            defaults/         #
+                main.yml      #  default lower priority variables
+            meta/             #
+                main.yml      #  role dependencies
+
+        webtier/              # same structure as "common"
+        monitoring/           # ""
+        fooapp/               # ""
+
 
 ## Complex Playbook Example - WordPress & Nginx on CentOS-7 system
 
