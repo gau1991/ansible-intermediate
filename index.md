@@ -163,7 +163,7 @@ OR
 
 ## Become
   - Command Line Options
-   - `--ask-become-pass, -K`
+    - `--ask-become-pass, -K`
     - `--become, -b`
     - `--become-method=BECOME_METHOD`
     - `--become-user=BECOME_USER`
