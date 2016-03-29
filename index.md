@@ -61,31 +61,10 @@ style: |
 
 ## Contents
 
-  1. Become
-  2. More about Inventory
+  1. More about Inventory
+  2. Become
   3. Check Mode
   4. Complex Playbook Example - WordPress & Nginx on CentOS-7 system
-
-## Become
-
-  - Directive
-    - become
-    - become_user
-    - become_method
-  - Connection variables
-    - ansible_become
-    - ansible_become_method
-    - ansible_become_user
-    - ansible_become_pass
-
-## Become
-
- - Command Line Options
-   - `--ask-become-pass, -K`
-   - `--become, -b`
-   - `--become-method=BECOME_METHOD`
-   - `--become-user=BECOME_USER`
-
 
 ## More about Inventory
 
@@ -128,9 +107,28 @@ style: |
     [usa:children]
     southeast
 
+## Become
+    - Directive
+      - become
+      - become_user
+      - become_method
+    - Connection variables
+      - ansible_become
+      - ansible_become_method
+      - ansible_become_user
+      - ansible_become_pass
+
+## Become
+  - Command Line Options
+   - `--ask-become-pass, -K`
+    - `--become, -b`
+    - `--become-method=BECOME_METHOD`
+    - `--become-user=BECOME_USER`
+
+
 ## Complex Playbook Example - WordPress & Nginx on CentOS-7 system
 
-[Demo Time](https://github.com/ansible/ansible-examples/tree/master/wordpress-nginx_rhel7) 
+[Demo Time](https://github.com/ansible/ansible-examples/tree/master/wordpress-nginx_rhel7)
 
 ## References
 
