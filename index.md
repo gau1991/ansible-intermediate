@@ -48,6 +48,15 @@ style: |
         line-height:25px;
         }
 
+    #Inventory2 p {
+        margin:0 0 15px;
+        line-height:25px;
+        }
+    #Inventory2 code {
+        margin:0 0 0;
+        line-height:25px;
+        }
+
 
 ---
 
@@ -63,8 +72,9 @@ style: |
 
   1. More about Inventory
   2. Become
-  3. Check Mode
-  4. Complex Playbook Example - WordPress & Nginx on CentOS-7 system
+  3. Vault
+  4. More into Playbook
+  5. Complex Playbook Example - WordPress & Nginx on CentOS-7 system
 
 ## More about Inventory
 
@@ -107,6 +117,19 @@ style: |
     [usa:children]
     southeast
 
+## More about Inventory {#Inventory2}
+<b>Splitting Out Host and Group Specific Data</b>
+
+    /etc/ansible/group_vars/raleigh
+    /etc/ansible/group_vars/webservers
+    /etc/ansible/host_vars/foosball
+
+OR
+
+    /etc/ansible/group_vars/raleigh/db_settings
+    /etc/ansible/group_vars/raleigh/cluster_settings
+
+
 ## Become
     - Directive
       - become
@@ -125,6 +148,37 @@ style: |
     - `--become-method=BECOME_METHOD`
     - `--become-user=BECOME_USER`
 
+## Vault
+  - Creating Encrypted Files
+    - `$ansible-vault create foo.yml`
+  - Editing Encrypted Files
+    - `$ansible-vault edit foo.yml`
+  - Rekeying Encrypted Files
+    - `$ansible-vault rekey foo.yml`
+
+## Vault
+
+  - Encrypting Unencrypted Files
+    - `$ansible-vault encrypt foo.yml`
+  - Decrypting Encrypted Files
+    - `$ansible-vault decrypt foo.yml`
+  - Viewing Encrypted Files
+    - `ansible-vault view foo.yml`
+
+## Running a Playbook With Vault
+  - `$ansible-playbook site.yml --ask-vault-pass`
+  - `$ansible-playbook site.yml --vault-password-file ~/.vault_pass.txt`
+  -  Setting ENV Variable `ANSIBLE_VAULT_PASSWORD_FILE`
+
+## More into Playbook
+
+ - Vars
+ - Tasks
+ - Handlers
+ - Roles
+ - Files
+ - Meta
+ - Templates
 
 ## Complex Playbook Example - WordPress & Nginx on CentOS-7 system
 
